@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
-from .RatedPlayerIdValidator import RatedPlayerIdValidator, ValidatorUsingRegex, RatedPlayerIdValidatorHttp
+from player_existence.RatedPlayerIdValidator import RatedPlayerIdValidator, ValidatorUsingRegex, RatedPlayerIdValidatorHttp
 
 class UscfPlayerIdValidatorQueryString(ValidatorUsingRegex, RatedPlayerIdValidator, RatedPlayerIdValidatorHttp):
     def __init__(self, failed_validation_regex, **kwargs):
@@ -44,16 +44,3 @@ class UscfPlayerIdValidatorFormData(ValidatorUsingRegex, RatedPlayerIdValidator,
     def _fetchLookupRequest(self, url, form_data):
         """Returns the HTTP request for the request url"""
         return requests.post(url, data=form_data, files=[])
-
-if __name__ == '__main__':
-    rated_player_validator_form_data = UscfPlayerIdValidatorFormData(
-        lookup_base_url='https://www.uschess.org/assets/msa_joomla/MbrLst.php',
-        failed_validation_regex='No matches were found for',
-        )
-    print(rated_player_validator_form_data.validId('13579606'))
-
-    rated_player_validator_query_string = UscfPlayerIdValidatorQueryString(
-        lookup_base_url='https://www.uschess.org/datapage/player-search.php',
-        failed_validation_regex='Players found: 0',
-        )
-    print(rated_player_validator_query_string.validId('13579606'))
