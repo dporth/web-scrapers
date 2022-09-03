@@ -3,11 +3,10 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import sys
 
-def fetch_rating_lookup(id):
+def fetch_ratings(id):
 	print(f"Fetching rating for USCF number {id} at http://www.uschess.org/msa/MbrDtlRtgSupp.php?{id}")
 	return requests.get(f"http://www.uschess.org/msa/MbrDtlRtgSupp.php?{id}")
 	
-
 if __name__ == '__main__':
 	if len(sys.argv) < 2:
 		print("ERROR: Please replace <uscf number> with one or more valid USCF numbers.")
@@ -16,7 +15,7 @@ if __name__ == '__main__':
 		date = []
 		regular_rating = []
 		for each in sys.argv[1:]:
-			page = fetch_rating_lookup(each)
+			page = fetch_ratings(each)
 			soup = BeautifulSoup(page.content, 'html.parser')
 			table_container = soup.find(class_='topbar-middle')
 			tables_outer = table_container.find_all('table')
