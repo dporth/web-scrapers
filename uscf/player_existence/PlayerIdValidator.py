@@ -1,7 +1,7 @@
 from abc import abstractmethod, ABC
 import re
 
-class RatedPlayerIdValidator(ABC):
+class PlayerIdValidator(ABC):
     
     @abstractmethod
     def validId(self, player_id):
@@ -9,11 +9,11 @@ class RatedPlayerIdValidator(ABC):
         api lookup says the id is valid."""
         pass
 
-class RatedPlayerIdValidatorHttp:
+class ValidatorHttpMixin:
     def __init__(self, lookup_base_url):
         self.lookup_base_url = lookup_base_url
         
-class ValidatorUsingRegex:
+class ValidatorUsingRegexMixin:
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 

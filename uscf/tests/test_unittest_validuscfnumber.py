@@ -1,5 +1,5 @@
 import pytest
-from player_existence.ValidateUscfNumber import UscfPlayerIdValidatorQueryString, UscfPlayerIdValidatorFormData
+from player_existence.UscfValidators import UscfPlayerIdValidatorQueryString, UscfPlayerIdValidatorFormData
 
 query_string_lookup_base_url='https://www.uschess.org/datapage/player-search.php'
 form_data_lookup_base_url='https://www.uschess.org/assets/msa_joomla/MbrLst.php'

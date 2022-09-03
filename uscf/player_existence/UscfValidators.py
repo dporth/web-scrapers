@@ -1,8 +1,8 @@
 from bs4 import BeautifulSoup
 import requests
-from player_existence.RatedPlayerIdValidator import RatedPlayerIdValidator, ValidatorUsingRegex, RatedPlayerIdValidatorHttp
+from player_existence.PlayerIdValidator import PlayerIdValidator, ValidatorUsingRegexMixin, ValidatorHttpMixin
 
-class UscfPlayerIdValidatorQueryString(ValidatorUsingRegex, RatedPlayerIdValidator, RatedPlayerIdValidatorHttp):
+class UscfPlayerIdValidatorQueryString(PlayerIdValidator, ValidatorUsingRegexMixin, ValidatorHttpMixin):
     def __init__(self, failed_validation_regex, **kwargs):
         self.failed_validation_regex = failed_validation_regex
         super().__init__(**kwargs)
@@ -23,7 +23,7 @@ class UscfPlayerIdValidatorQueryString(ValidatorUsingRegex, RatedPlayerIdValidat
         """Returns the HTTP request for the request url"""
         return requests.get(url, )
 
-class UscfPlayerIdValidatorFormData(ValidatorUsingRegex, RatedPlayerIdValidator, RatedPlayerIdValidatorHttp):
+class UscfPlayerIdValidatorFormData(PlayerIdValidator, ValidatorUsingRegexMixin, ValidatorHttpMixin):
     def __init__(self, failed_validation_regex, **kwargs):
         self.failed_validation_regex = failed_validation_regex
         super().__init__(**kwargs)
